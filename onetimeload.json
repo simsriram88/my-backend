@@ -1,0 +1,50 @@
+{
+    "blueprints": [
+      {
+        "blueprint_id": "data_platform_blueprint",
+        "version": "1.0.0",
+        "iac_format": "terraform",
+        "source": "git::https://repo/blueprints/data_platform_blueprint",
+        "resource_types": [
+          { "resource_type": "StorageAccount",   "blueprint_mandatory": true  },
+          { "resource_type": "AzureKeyVault",    "blueprint_mandatory": true  },
+          { "resource_type": "AzureDatabricks",  "blueprint_mandatory": false },
+          { "resource_type": "Synapse",          "blueprint_mandatory": false },
+          { "resource_type": "AzureDataFactory", "blueprint_mandatory": false },
+          { "resource_type": "AzureCosmosDB",    "blueprint_mandatory": false },
+          { "resource_type": "MicrosoftPurview", "blueprint_mandatory": false }
+        ]
+      }
+    ],
+    "resource_types": [
+      {
+        "resource_type": "StorageAccount",
+        "provider": "Azure",
+        "category": "Storage",
+        "parameters": [
+          { "key": "storage_account_name",            "required": true, "defaultValue": null, "parameter_type": "mandatory" },
+          { "key": "storage_account_location",         "required": true, "defaultValue": null, "parameter_type": "mandatory" },
+          { "key": "storage_account_resource_group",   "required": true, "defaultValue": null, "parameter_type": "mandatory" },
+          { "key": "storage_account_replication_type", "required": true, "defaultValue": null, "parameter_type": "mandatory" },
+          { "key": "storage_account_account_tier",     "required": true, "defaultValue": null, "parameter_type": "mandatory" }
+        ]
+      },
+      {
+        "resource_type": "AzureKeyVault",
+        "provider": "Azure",
+        "category": "Security",
+        "parameters": [
+          { "key": "key_vault_name",           "required": true, "defaultValue": null, "parameter_type": "mandatory" },
+          { "key": "key_vault_location",        "required": true, "defaultValue": null, "parameter_type": "mandatory" },
+          { "key": "key_vault_resource_group",  "required": true, "defaultValue": null, "parameter_type": "mandatory" },
+          { "key": "key_vault_sku_name",        "required": true, "defaultValue": null, "parameter_type": "mandatory" },
+          { "key": "key_vault_tenant_id",       "required": true, "defaultValue": null, "parameter_type": "mandatory" }
+        ]
+      },
+      { "resource_type": "AzureDatabricks",  "provider": "Azure", "category": "Analytics",    "parameters": [] },
+      { "resource_type": "Synapse",          "provider": "Azure", "category": "Analytics",    "parameters": [] },
+      { "resource_type": "AzureDataFactory", "provider": "Azure", "category": "Integration",  "parameters": [] },
+      { "resource_type": "AzureCosmosDB",    "provider": "Azure", "category": "Database",     "parameters": [] },
+      { "resource_type": "MicrosoftPurview", "provider": "Azure", "category": "Governance",   "parameters": [] }
+    ]
+}
